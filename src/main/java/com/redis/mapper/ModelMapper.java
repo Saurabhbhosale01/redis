@@ -4,8 +4,6 @@ import com.redis.dto.UserDto;
 import com.redis.entity.UserEntity;
 import org.springframework.stereotype.Component;
 
-import java.util.Optional;
-
 @Component
 public class ModelMapper {
 
