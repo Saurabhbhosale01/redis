@@ -22,30 +22,7 @@ The application follows a **Cache-Aside Pattern**:
 - Cache expiration using TTL
 - JSON serialization/deserialization
 
-## 🏗️ Architecture
 
-```text
-Client
-  |
-  v
-Controller
-  |
-  v
-Service
-  |
-  +---------> Redis
-  |             |
-  |          Cache Hit
-  |             |
-  |             v
-  |          Response
-  |
-  +---------> PostgreSQL
-                |
-             Cache Miss
-                |
-                v
-              Redis
 
 ## Tech Stack
 
