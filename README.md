@@ -1,4 +1,4 @@
-# Redis Demo Application
+# Redis Application
 
 A Spring Boot application demonstrating how to integrate **Redis caching** with **PostgreSQL** using Spring Data Redis.
 
