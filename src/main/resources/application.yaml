@@ -4,9 +4,9 @@ spring:
 
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/redis
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
+    url: jdbc:postgresql://localhost:5432/redisdb
+    username: redis
+    password: postgres
     driver-class-name: org.postgresql.Driver
 
 
