@@ -27,16 +27,16 @@ public class RedisService {
      */
     public <T> T get(String key, Class<T> entityClass) {
         try {
-            Object obj = redisTemplate.opsForValue().get(key);
+            Object value = redisTemplate.opsForValue().get(key);
 
-            if (obj == null) {
+            if (value == null) {
                 log.info("Redis cache miss for key: {}", key);
                 return null;
             }
 
             log.info("Redis cache hit for key: {}", key);
 
-            return objectMapper.readValue(obj.toString(), entityClass);
+            return objectMapper.readValue(value.toString(), entityClass);
 
         } catch (Exception e) {
             log.error("Failed to get Redis key: {}", key, e);
