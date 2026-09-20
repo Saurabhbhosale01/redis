@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: redis-demo-application0
+
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/redis
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+
+
+  redis:
+    host: localhost
+    port: 6379
+    cache:
+      user-ttl: 600
+
+  logging:
+    level:
+      root: INFO
+      com.redis: DEBUG
