@@ -28,8 +28,7 @@ public class UserServiceImpl implements UserService {
 
         redisService.set(
                 String.valueOf(saved.getId()),
-                saved,
-                600L
+                saved
         );
     }
 
@@ -54,8 +53,7 @@ public class UserServiceImpl implements UserService {
         // 4. Store DB data in Redis
         redisService.set(
                 id,
-                entity,
-                600L
+                entity
         );
 
         // 5. Return response

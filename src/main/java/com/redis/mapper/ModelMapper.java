@@ -16,8 +16,9 @@ public class ModelMapper {
                 .build();
     }
 
-    public UserDto toDto(UserEntity userEntity){
+    public UserDto toDto(UserEntity userEntity) {
         return UserDto.builder()
+                .id(userEntity.getId())
                 .name(userEntity.getName())
                 .gmail(userEntity.getGmail())
                 .build();

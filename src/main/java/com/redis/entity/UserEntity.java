@@ -7,11 +7,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Builder;
 import lombok.Data;
-import lombok.experimental.SuperBuilder;
 
 @Entity
 @Data
-@SuperBuilder
+@Builder
 public class UserEntity {
 
     @Id

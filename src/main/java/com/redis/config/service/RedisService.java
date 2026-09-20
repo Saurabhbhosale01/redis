@@ -1,7 +1,9 @@
 package com.redis.config.service;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import tools.jackson.databind.ObjectMapper;
@@ -10,22 +12,34 @@ import java.util.concurrent.TimeUnit;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class RedisService {
 
-    @Autowired
-    private RedisTemplate redisTemplate;
+    private final RedisTemplate<String, Object> redisTemplate;
+
+    private final ObjectMapper objectMapper;
+
+    @Value("${redis.cache.ttl}")
+    private long ttl;
 
 
-    //this method is used to get the data and return type is generic class
-    public <t> t get(String key, Class<t> entityClass){
-        try{
+    /** this method is used to get the data from the redis and return type is generic class
+     */
+    public <T> T get(String key, Class<T> entityClass) {
+        try {
             Object obj = redisTemplate.opsForValue().get(key);
-            log.info("objjjjj"+obj);
-            ObjectMapper objectMapper = new ObjectMapper();
-            return objectMapper.readValue(obj.toString(),entityClass );
-        }
-        catch (Exception e){
-            log.error("exception "+e);
+
+            if (obj == null) {
+                log.info("Redis cache miss for key: {}", key);
+                return null;
+            }
+
+            log.info("Redis cache hit for key: {}", key);
+
+            return objectMapper.readValue(obj.toString(), entityClass);
+
+        } catch (Exception e) {
+            log.error("Failed to get Redis key: {}", key, e);
             return null;
         }
     }
@@ -35,12 +49,14 @@ public class RedisService {
      * how much time period the data will present in redis cache and
      * timeUnite fot the unite of time like sec, min
      */
-    public void set(String key, Object o, long ttl){
-        try{
-            redisTemplate.opsForValue().set(key,o.toString(),ttl, TimeUnit.SECONDS);
-        }
-        catch (Exception e){
-            log.error("exception"+e);
+    public void set(String key, Object value) {
+        try {
+            String json = objectMapper.writeValueAsString(value);
+
+            redisTemplate.opsForValue().set(key, json, ttl, TimeUnit.SECONDS);
+
+        } catch (Exception e) {
+            log.error("Failed to set Redis key: {}", key, e);
         }
     }
 }

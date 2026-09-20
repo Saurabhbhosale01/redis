@@ -21,4 +21,13 @@ class RedisDemoApplicationTests {
         Object email = redisTemplate.opsForValue().get("email");
     }
 
+    @Test
+    void shouldStoreAndRetrieveValueFromRedis() {
+
+        redisTemplate.opsForValue().set("email", "sau@gmail.com");
+
+        Object email = redisTemplate.opsForValue().get("email");
+
+    }
+
 }
