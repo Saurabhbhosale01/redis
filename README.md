@@ -12,6 +12,41 @@ The application follows a **Cache-Aside Pattern**:
 
 ---
 
+## 📌 Features
+
+- User management using Spring Boot
+- PostgreSQL for persistent data storage
+- Redis for caching user data
+- Cache-Aside pattern
+- Redis `GET` and `SET` operations
+- Cache expiration using TTL
+- JSON serialization/deserialization
+
+## 🏗️ Architecture
+
+```text
+Client
+  |
+  v
+Controller
+  |
+  v
+Service
+  |
+  +---------> Redis
+  |             |
+  |          Cache Hit
+  |             |
+  |             v
+  |          Response
+  |
+  +---------> PostgreSQL
+                |
+             Cache Miss
+                |
+                v
+              Redis
+
 ## Tech Stack
 
 - Java 21
