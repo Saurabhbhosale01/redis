@@ -1,23 +1,23 @@
 spring:
   application:
     name: redis-demo-application
-
+#creds added env file
   datasource:
-    url: jdbc:postgresql://localhost:5432/redisdb
-    username: postgres
-    password: root
+    url: jdbc:postgresql://localhost:5432/${POSTGRES_DB}
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
     driver-class-name: org.postgresql.Driver
 
+  # redis-cli key for communication to redis cloud through url added on .env file
   data:
     redis:
-      host: localhost
-      port: 6379
+      url: ${REDIS_URL}
 
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
-
+# TTL (Time To Live): The amount of time a key remains available in Redis before it expires.
 redis:
   cache:
     ttl: 600
