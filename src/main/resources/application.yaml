@@ -8,16 +8,16 @@ spring:
     password: root
     driver-class-name: org.postgresql.Driver
 
+  # redis-cli key for communication to redis cloud through url
   data:
     redis:
-      host: localhost
-      port: 6379
+      url: redis://default:vJuXzDXSSdD3vLOdqdWBhGjjJWUSW1bT@specular-idealistic-coherent-42246.db.redis.io:10112
 
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
-
+  # TTL (Time To Live): The amount of time a key remains available in Redis before it expires.
 redis:
   cache:
     ttl: 600
